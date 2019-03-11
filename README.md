@@ -1,4 +1,4 @@
-# docker-locust-performance
+# docker-locust-performance-test
 Docker Locusts Performance Test with Wordpress
 
 ## Scheme
