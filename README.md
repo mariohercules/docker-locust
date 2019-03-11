@@ -5,16 +5,17 @@ Docker Locusts Performance Test with Wordpress
 
 ![Screenshot](Diagram-Locust.png)
 
-
+mysql
 ## How-To
 
-*  create containers (proxy, wordpress and mysql)
+*  Create containers (proxy, wordpress and mysql).
 
 ```
 $ docker-compose up -d
 ```
 
-*  create containers (proxy, wordpress and mysql)
+* Create docker image and container.
+* Run docker image and add to existing network.
 
 ```
 $ cd locusts
