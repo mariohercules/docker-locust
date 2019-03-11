@@ -3,7 +3,7 @@ Docker Locust Performance Test with Wordpress
 
 ## Scheme
 
-*  Only nginx is on accessible network from users and locust app.
+*  Only nginx is on a accessible network from users and locust app.
 *  Wordpress and MySQL can only be accessible from nginx.
 
 ![Screenshot](Diagram-Locust.png)
