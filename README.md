@@ -8,9 +8,10 @@ Docker Locust Performance Test with Wordpress
 
 ![Screenshot](Diagram-Locust.png)
 
-## How-To
+## Howto use
 
-*  Create containers (proxy, wordpress and mysql).
+* Create containers (proxy, wordpress and mysql).
+* Clone this repository and execute command:
 
 ```
 $ docker-compose up -d
