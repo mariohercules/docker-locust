@@ -13,7 +13,7 @@ Docker Locust Performance Test with Wordpress
 ### Configure containers
 
 * Create containers (proxy, wordpress and mysql).
-* Clone this repository and execute command:
+* Clone this repository and execute this commands:
 
 ```
 $ cd docker
@@ -21,7 +21,7 @@ $ docker-compose up -d
 $ docker ps --format "table {{.Image}}\t{{.Status}}\t{{.Names}}\t{{.Ports}}"
 ```
 
-* Verify if you have 5 containers up 
+* Verify if exists 5 containers is up with command `docker ps` 
 
 ```
 IMAGE               COMMAND                  NAMES                 PORTS
@@ -77,7 +77,7 @@ class WebsiteUser(HttpLocust):
 ```
 * Create image and container for locust.
 * Run docker image and add to existing network.
-* Check what IP address was generated to container network and put it on locust call command --host.
+* Call locust command with parameters of the file and of host 
 
 ```
 $ cd locusts
