@@ -14,8 +14,8 @@ Docker Locust Performance Test with Wordpress
 
 ### Configure containers
 
-* Create containers (proxy, wordpress and mysql).
-* Clone this repository and execute this commands:
+* Clone this repository.
+* Run a command to create containers (proxy, wordpress and mysql).
 
 ```
 $ cd docker
