@@ -87,6 +87,7 @@ $ docker run --rm -ti -p 8089:8089 --network=docker_default locust:latest /bin/s
 ```
 
 * Go to url `http://localhost:8089` 
-* Enter the parameters `Number of users to simulate` and `Hatch rate (users spawned/second)` on form and press the button `Start swarming`
+* Enter the parameters on the fields `Number of users to simulate` and `Hatch rate (users spawned/second)` on form and press the button `Start swarming`
+* The locust will start to executing the tasks and collecting data from request and response.
 
 ![Screenshot](Locust.png)
