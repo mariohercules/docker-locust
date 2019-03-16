@@ -48,8 +48,7 @@ $ tail nginx/log/access.log
 ### Configure locust
 
 * Open `locustfile.py` on folder `/docker/locusts/scripts/` and change IP address with one that was generated on line `host = os.getenv('TARGET_URL', "http://172.19.0.1")`.
-* Feel free to change the file `locustfile.py` with your own test parameters.
-* For this project I created 3 task to be tested -- Fell free to change this with your own tasks.
+* For this project I created 3 task to be tested -- Feel free to change with your own tasks.
 
 ```python
 import os                                                                                  
