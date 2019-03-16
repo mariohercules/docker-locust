@@ -21,7 +21,7 @@ $ docker-compose up -d
 $ docker ps --format "table {{.Image}}\t{{.Status}}\t{{.Names}}\t{{.Ports}}"
 ```
 
-* Verify if exists 5 containers is up with command `docker ps` 
+* Verify if the 5 containers is up
 
 ```
 IMAGE               COMMAND                  NAMES                 PORTS
