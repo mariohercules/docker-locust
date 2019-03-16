@@ -8,7 +8,7 @@ Docker Locust Performance Test with Wordpress
 
 ![Screenshot](Diagram-Locust.png)
 
-## Howto use
+## How to use
 
 ### Configure containers
 
