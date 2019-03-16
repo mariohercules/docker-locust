@@ -1,6 +1,8 @@
 # docker-locust-performance-test
 Docker Locust Performance Test with Wordpress
 
+* Locust is an open source loading test tool where users behavior can be simulated with python code.
+
 ## Scheme
 
 *  Only nginx is on accessible network to the users and locust app.
