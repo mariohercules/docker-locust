@@ -79,12 +79,20 @@ class WebsiteUser(HttpLocust):
 ```
 * Create image and container for locust.
 * Run docker image and add to existing network.
-* Call locust command with parameters of the file and of host 
 
 ```
 $ cd locusts
 $ docker build -t locust:latest .
 $ docker run --rm -ti -p 8089:8089 --network=docker_default locust:latest /bin/sh
+```
+
+* Call locust command with parameters of the file or of host 
+
+```bash
+/ # locust -f locustfile.py
+```
+or
+```bash
 / # locust -f locustfile.py --host=http://172.19.0.1
 ```
 
