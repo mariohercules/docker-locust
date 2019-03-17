@@ -19,6 +19,7 @@ Docker Locust Performance Test with Wordpress
 
 ```
 $ cd docker
+$ docker-compose build
 $ docker-compose up -d
 $ docker ps --format "table {{.Image}}\t{{.Status}}\t{{.Names}}\t{{.Ports}}"
 ```
