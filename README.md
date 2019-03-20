@@ -37,7 +37,7 @@ mysql:5.5.60        "docker-entrypoint.s…"   docker_db_1           3306/tcp
 
 * Open `http://localhost`
 * Install e configure WordPress 
-* Open `nginx.log` to get IP that was generated -- in this case is `172.19.0.1`
+* Open `nginx/log/access.log` to get IP that was generated -- in this case is `172.19.0.1`
 
 ```
 $ tail nginx/log/access.log
