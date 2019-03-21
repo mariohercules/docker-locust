@@ -1,7 +1,7 @@
 # docker-locust
 Docker Locust Performance Test with Wordpress
 
-* Locust `https://locust.io` is an open source loading test tool where users behavior can be simulated with python code.
+* [Locust](https://locust.io) is an open source loading test tool where users behavior can be simulated with python code.
 
 ## Scheme
 
