@@ -44,6 +44,7 @@ services:
     depends_on:
       - db       
   nginx:
+    container_name: nginx
     image: nginx:latest
     restart: always
     volumes:
@@ -55,4 +56,13 @@ services:
     depends_on:
       - wordpress1
       - wordpress2
-      - wordpress3              
+      - wordpress3  
+  locust:
+    build:
+      context: locusts/
+      dockerfile: Dockerfile               
+    ports:
+      - 8089:8089
+      - 5557:5557 
+      - 5558:5558     
+    tty: true       
