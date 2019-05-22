@@ -1,3 +1,4 @@
 .DS_Store
 docker/wordpress
+!docker/wordpress/locust
 docker/nginx
