@@ -18,7 +18,7 @@ class SimpleTrafficRequest(TaskSet):
         self.client.get("/?s=test")
 
     @task(4)
-    def search_for_blog_unpost(self):
+    def blog_post(self):
         self.client.get("/locust/add-post.php")        
 
 class WebsiteUser(HttpLocust):         
