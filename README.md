@@ -15,7 +15,7 @@ Docker Locust Performance Test with Wordpress
 ### Configure containers
 
 * Clone this repository.
-* Run a command to create containers (proxy, wordpress and mysql).
+* Run a command to create containers (locust, ngninx-proxy, wordpress and mysql).
 
 ```
 $ cd docker
@@ -24,34 +24,29 @@ $ docker-compose up -d
 $ docker ps --format "table {{.Image}}\t{{.Status}}\t{{.Names}}\t{{.Ports}}"
 ```
 
-* Verify if the 5 containers is up
+* Verify if the 6 containers is up
 
 ```
-IMAGE               COMMAND                  NAMES                 PORTS
-nginx:latest        "nginx -g 'daemon of…"   docker_nginx_1        0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp
-wordpress:latest    "docker-entrypoint.s…"   docker_wordpress2_1   80/tcp
-wordpress:latest    "docker-entrypoint.s…"   docker_wordpress1_1   80/tcp
-wordpress:latest    "docker-entrypoint.s…"   docker_wordpress3_1   80/tcp
-mysql:5.5.60        "docker-entrypoint.s…"   docker_db_1           3306/tcp
+IMAGE               STATUS              NAMES                 PORTS
+nginx:latest        Up 5 minutes        nginx                 0.0.0.0:80->80/tcp
+wordpress:latest    Up 5 minutes        docker_wordpress2_1   80/tcp
+wordpress:latest    Up 5 minutes        docker_wordpress3_1   80/tcp
+wordpress:latest    Up 5 minutes        docker_wordpress1_1   80/tcp
+docker_locust       Up 5 minutes        docker_locust_1       0.0.0.0:8089->8089/tcp
+mysql:5.5.60        Up 5 minutes        docker_db_1           3306/tcp
 ```
 
 * Open `http://localhost`
 * Install e configure WordPress 
-* Open `nginx/log/access.log` to get IP that was generated -- in this case is `172.19.0.1`
 
-```
-$ tail nginx/log/access.log
+* Open `http://localhost:8089` 
+* Enter the parameters on the fields `Number of users to simulate` and `Hatch rate (users spawned/second)` on form and press the button `Start swarming`
+* The locust will start to executing the tasks and collecting data from request and response.
 
-172.19.0.1 - - [16/Mar/2019:00:33:48 +0000] "GET / HTTP/1.1" 200 5477 "http://localhost/wp-admin/edit.php?post_type=page" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"
-172.19.0.1 - - [16/Mar/2019:00:33:50 +0000] "GET /wp-includes/js/comment-reply.min.js?ver=5.1.1 HTTP/1.1" 200 1093 "http://localhost/2019/03/15/ola-mundo/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"
-172.19.0.1 - - [16/Mar/2019:00:33:50 +0000] "GET /2019/03/15/ola-mundo/ HTTP/1.1" 200 6783 "http://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"
+### Locust config (optional)
 
-```
-
-### Configure locust
-
-* Open `locustfile.py` on folder `/docker/locusts/scripts/` and change IP address with one that was generated on line `host = os.getenv('TARGET_URL', "http://172.19.0.1")`.
-* For this project I created 3 task to be tested -- Feel free to change with your own tasks.
+* The `locustfile.py` on folder `/docker/locusts/scripts/` is the script.
+* For this project I created 4 task to be tested -- Feel free to change with your own tasks.
 
 ```python
 import os                                                                                  
@@ -67,38 +62,22 @@ class SimpleTrafficRequest(TaskSet):
     
     @task(2)
     def search_for_blog_post(self):
-        self.client.get("/?s=ola")
+        self.client.get("/?s=ola-mundo")
     
-    @task(2)
+    @task(3)
     def search_for_blog_unpost(self):
         self.client.get("/?s=test")
 
+    @task(4)
+    def search_for_blog_unpost(self):
+        self.client.get("/locust/add-post.php")        
+
 class WebsiteUser(HttpLocust):         
-    host = os.getenv('TARGET_URL', "http://172.19.0.1")
+    host = os.getenv('TARGET_URL', "http://nginx")
     task_set = SimpleTrafficRequest                            
     min_wait = 5000
+    max_wait = 15000
+    #stop_timeout = 100
 ```
-* Create image and container for locust.
-* Run docker image and add to existing network.
-
-```
-$ cd locusts
-$ docker build -t locust:latest .
-$ docker run --rm -ti -p 8089:8089 --network=docker_default locust:latest /bin/sh
-```
-
-* Call locust command with parameters of the file or of host 
-
-```bash
-/ # locust -f locustfile.py
-```
-or
-```bash
-/ # locust -f locustfile.py --host=http://172.19.0.1
-```
-
-* Go to url `http://localhost:8089` 
-* Enter the parameters on the fields `Number of users to simulate` and `Hatch rate (users spawned/second)` on form and press the button `Start swarming`
-* The locust will start to executing the tasks and collecting data from request and response.
 
 ![Screenshot](Locust.png)
