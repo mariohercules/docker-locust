@@ -47,6 +47,8 @@ mysql:5.5.60        Up 5 minutes        docker_db_1           3306/tcp
 
 * The `locustfile.py` on folder `/docker/locusts/scripts/` is the script.
 * For this project I created 4 task to be tested -- Feel free to change with your own tasks.
+* max_wait = will run until time (seconds) reach the end. -- in this case will run for 15 minutes.
+
 
 ```python
 import os                                                                                  
