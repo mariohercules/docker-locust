@@ -25,5 +25,5 @@ class WebsiteUser(HttpLocust):
     host = os.getenv('TARGET_URL', "http://nginx")
     task_set = SimpleTrafficRequest                            
     min_wait = 5000
-    max_wait = 15000  
+    #max_wait = 15000  
     #stop_timeout = 100
